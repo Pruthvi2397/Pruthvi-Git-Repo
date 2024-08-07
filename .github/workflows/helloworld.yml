@@ -15,7 +15,7 @@ on:
 jobs:
   Logintodockerhub:
     runs-on: ubuntu-latest
-    environment: dev
+    environment: Pruthvi-Env
     steps:
       - uses: actions/checkout@v3
       - name: docker login
@@ -28,7 +28,7 @@ jobs:
           
   Logintodockerhub2:
     runs-on: ubuntu-latest
-    environment: QA
+    environment: Pruthvi-Env2
     steps:
       - uses: actions/checkout@v3
       - name: docker login
