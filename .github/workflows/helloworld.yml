@@ -1,21 +1,23 @@
 # This is a basic workflow to help you get started with Actions
-
-name: CI
-
+ 
+name: Login docker hub
+ 
 # Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the "master" branch
+  # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
-    branches: [ "master" ]
+    branches: [ "main" ]
   pull_request:
-    branches: [ "master" ]
-
+    branches: [ "main" ]
+ 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
+ 
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   Logintodockerhub:
     runs-on: ubuntu-latest
-    environment: Pruthvi-Env
+    environment: Dev
     steps:
       - uses: actions/checkout@v3
       - name: docker login
@@ -24,11 +26,16 @@ jobs:
           registry: registry-1.docker.io
           username: ${{secrets.DOCKERUSERNAME}}
           password: ${{secrets.DOCKERUSERPASSWORD}}
-
-          
+          run: docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_PASSWORD }} registry.hub.docker.com
+      - name: Docker pull
+        run: docker pull mysql
+      - name: docker tag
+        run: docker tag mysql pruthvi2397/docker-repo
+      - name: docker push 
+        run: docker push pruthvi2397/docker-repo
   Logintodockerhub2:
     runs-on: ubuntu-latest
-    environment: Pruthvi-Env2
+    environment: QA
     steps:
       - uses: actions/checkout@v3
       - name: docker login
@@ -37,6 +44,3 @@ jobs:
           registry: registry-1.docker.io
           username: ${{secrets.DOCKERUSERNAME}}
           password: ${{secrets.DOCKERUSERPASSWORD}}
-
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
-
