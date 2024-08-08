@@ -1,43 +1,40 @@
-# This is a basic workflow to help you get started with Actions
+# This is a basic workflow to help you get started with 
 
 name: CI
 
 # Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the "master" branch
+  # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
-    branches: [ "master" ]
+    branches: 
+      - main
   pull_request:
-    branches: [ "master" ]
+    branches: [ "main" ]
 
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
 jobs:
-  Logintodockerhub:
+  lint:
     runs-on: ubuntu-latest
-    environment: Pruthvi-Env
     steps:
-      - uses: actions/checkout@v3
-      - name: docker login
-        uses: docker/login-action@v2.1.0
-        with:
-          username: ${{secrets.DOCKERUSERNAME}}
-          password: ${{secrets.DOCKERUSERPASSWORD}}
-      - name: Docker pull
-        run: docker pull mysql
-      - name: docker tag
-        run: docker tag mysql pruthvi2397/docker-repo
-      - name: docker push 
-        run: docker push pruthvi2397/docker-repo
-
-  Logintodockerhub2:
+      - uses: actions/checkout@v2
+      - run: echo "Hello world"
+  test:
     runs-on: ubuntu-latest
-    environment: Pruthvi-Env2
     steps:
-      - uses: actions/checkout@v3
-      - name: docker login
-        uses: docker/login-action@v2.1.0
-        with:
-          registry: registry-1.docker.io
-          username: ${{secrets.DOCKERUSERNAME}}
-          password: ${{secrets.DOCKERUSERPASSWORD}}
+      - uses: actions/checkout@v2
+      - run: echo "Hello world"
+  publish:
+    runs-on: ubuntu-latest
+    needs:
+      - lint
+      - test
+    steps:
+      - uses: actions/checkout@v2
+      - run: echo "Hello world"
+  test1:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest ]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v2
+      - run: echo "hello Test"
