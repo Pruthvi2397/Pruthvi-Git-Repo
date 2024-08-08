@@ -24,12 +24,6 @@ jobs:
           registry: registry-1.docker.io
           username: ${{secrets.DOCKERUSERNAME}}
           password: ${{secrets.DOCKERUSERPASSWORD}}
-      - name: Docker Pull
-	      run: docker pull mysql 
-      - name: Docker Tag
-	      run: docker tag mysql pruthvi2397/docker-repo
-      - name: Docker Push
-	      run: docker push pruthvi2397/docker-repo:mysql
 
           
   Logintodockerhub2:
