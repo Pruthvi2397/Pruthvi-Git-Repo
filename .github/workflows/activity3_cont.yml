@@ -27,9 +27,9 @@ jobs:
       - name: Docker Pull
 	      run: docker pull mysql 
       - name: Docker Tag
-	      run: docker tag mysql Pruthvi2397/Pruthvi-Git-Repo
+	      run: docker tag mysql pruthvi2397/docker-repo
       - name: Docker Push
-	      run: docker push Pruthvi2397/Pruthvi-Git-Repo
+	      run: docker push pruthvi2397/docker-repo
 
   Logintodockerhub2:
     runs-on: ubuntu-latest
