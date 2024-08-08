@@ -25,11 +25,11 @@ jobs:
           username: ${{secrets.DOCKERUSERNAME}}
           password: ${{secrets.DOCKERUSERPASSWORD}}
       - name: Docker Pull
-	      run: docker pull mysql 
+	run: docker pull mysql 
       - name: Docker Tag
-	      run: docker tag mysql pruthvi2397/docker-repo
+	run: docker tag mysql pruthvi2397/docker-repo
       - name: Docker Push
-	      run: docker push pruthvi2397/docker-repo
+	run: docker push pruthvi2397/docker-repo
 
   Logintodockerhub2:
     runs-on: ubuntu-latest
